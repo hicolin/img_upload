@@ -1,11 +1,15 @@
 <?php
 require_once('lib/function.php');
+
 date_default_timezone_set('PRC');
+
 if ($_GET['act'] == 'upload') {
+
     $upload = $_FILES['upload'];
     $info = $_POST['info'];
     $mark = intval($_POST['mark']);
     $scale = $_POST['scale'];
+
     if (!$upload) {
         show(0, '请选择图片');
     }
@@ -23,6 +27,7 @@ if ($_GET['act'] == 'upload') {
     list($width, $height) = explode('*', $scale);
     $width = intval($width);
     $height = intval($height);
+
     if (!preg_match('/800|600|400/', $width)) {
         show(0, '请选择正确的宽度');
     }
@@ -43,14 +48,17 @@ if ($_GET['act'] == 'upload') {
     if (!is_uploaded_file($upload['tmp_name'])) {
         show(0, '非法文件，文件' . $upload['name'] . '不是post获得的');
     }
+
     // 获取文件上传错误
     if ($upload['error'] > 0) {
         $result = upload_error($upload['error']);
         show(0, $result);
     }
+
     //文件后缀
     $suffix = ltrim(strrchr($upload['name'], '.'), '.');
     $allowSuffix = array('jpg', 'jpeg', 'gif', 'png');
+
     //文件类型
     $mimeType = ltrim(strrchr($upload['type'], '/'), '/');
     if (!in_array($suffix, $allowSuffix) || !in_array($mimeType, $allowSuffix)) {
@@ -68,14 +76,17 @@ if ($_GET['act'] == 'upload') {
         if (!file_exists($waterMark)) {
             show(0, '水印图片不存在');
         }
+
         $newName = date('YmdHis', time()) . '_' . uniqid() . '_' . 'tb_wm.' . $suffix;
         $newPath = './upload/' . $newName;
         $pct = 50;  // 透明度
         upload_image_water_mark($dstImg, $waterMark, 4, $pct, $newPath);
+
         //删除原图像
         unlink($dstImg);
         $dstImg = $newPath;
     }
+
     // 数据写入文件
     $dataArr = array(
         'info' => $info,
@@ -83,9 +94,11 @@ if ($_GET['act'] == 'upload') {
         'scale' => $scale,
         'src' => $dstImg,
     );
+
     $data = var_export($dataArr, true);
     // 拼接写入内容 并写入文件
     $res = file_put_contents('data.php', '$data[]=' . $data . ";\r\n", FILE_APPEND);
+
     if (!$res) {
         unlink($dstImg);
         show(0, '上传失败', '请重新上传');

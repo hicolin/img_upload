@@ -33,8 +33,10 @@
 <?php
 include_once('data.php');
 include_once('lib/function.php');
+
 // 数组按键逆向排序
 krsort($data);
+
 //关键词搜索
 if (isset($_GET['key'])) {
     $keyword = $_GET['key'];
@@ -53,12 +55,14 @@ if (isset($_GET['key'])) {
         echo "<script>dialog.error('搜索的内容不存在');</script>";
     }
 }
+
 // 分页
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $countNum = count($data);
 $perPage = 9;
 $totalPage = ceil($countNum / $perPage);
 $page = $page > $totalPage ? $totalPage : $page;
+
 // 按当前页码取出一定数量的数据
 if ($totalPage == 0) { //空数组不报错
     $data = array();

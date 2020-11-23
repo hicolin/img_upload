@@ -73,8 +73,8 @@ $data[]=array (
 );
 
 $data[]=array (
-  'info' => '234',
+  'info' => '晚霞',
   'mark' => 1,
-  'scale' => '800*600',
-  'src' => './upload/20180210220457_5a7efc09c9bc7_tb_wm.png',
+  'scale' => '600*450',
+  'src' => './upload/20201123133054_5fbb490e373ac_tb_wm.jpg',
 );

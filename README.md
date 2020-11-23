@@ -9,7 +9,7 @@
 * 缩略图和水印
 
 #### 页面展示:
-![首页](https://github.com/hicolin/upload_demo/tree/master/images/index.png "index.png")
+![首页](https://raw.githubusercontent.com/hicolin/upload_project/master/images/index.png "index.png")
 
 
 

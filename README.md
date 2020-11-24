@@ -1,4 +1,4 @@
-# upload_project
+# picture_upload
 初学`PHP`时，使用原生`PHP`做的一个`图片上传管理`项目（没有使用数据库）。  
 
 #### 主要包含以下知识点:
